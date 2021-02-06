@@ -1,4 +1,4 @@
-package com.example.currencyexchange
+package com.amrdeveloper.currencyexchange
 
 import androidx.lifecycle.MutableLiveData
 import retrofit2.Call

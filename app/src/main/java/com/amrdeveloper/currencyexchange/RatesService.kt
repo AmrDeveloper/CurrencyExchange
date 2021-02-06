@@ -1,4 +1,4 @@
-package com.example.currencyexchange
+package com.amrdeveloper.currencyexchange
 
 import retrofit2.Call
 import retrofit2.Retrofit

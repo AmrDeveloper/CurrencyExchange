@@ -1,10 +1,10 @@
-package com.example.currencyexchange
+package com.amrdeveloper.currencyexchange
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.currencyexchange.databinding.ActivityMainBinding
+import com.amrdeveloper.currencyexchange.databinding.ActivityMainBinding
 
 private const val TAG = "MainActivity"
 

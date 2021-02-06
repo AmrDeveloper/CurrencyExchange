@@ -1,4 +1,4 @@
-package com.example.currencyexchange
+package com.amrdeveloper.currencyexchange
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

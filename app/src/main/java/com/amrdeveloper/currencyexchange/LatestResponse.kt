@@ -1,4 +1,4 @@
-package com.example.currencyexchange
+package com.amrdeveloper.currencyexchange
 
 import com.google.gson.annotations.SerializedName
 
