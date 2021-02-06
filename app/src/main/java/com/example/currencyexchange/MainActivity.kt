@@ -2,10 +2,37 @@ package com.example.currencyexchange
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.currencyexchange.databinding.ActivityMainBinding
+
+private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var ratesAdapter: RatesAdapter
+    private lateinit var binding: ActivityMainBinding
+
+    private val mainViewModel: MainViewModel by viewModels {
+        val application = (application as MainApplication)
+        MainViewModelFactory(application.ratesRepository)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+        ratesAdapter = RatesAdapter()
+        binding.ratesRecyclerview.adapter = ratesAdapter
+        binding.ratesRecyclerview.layoutManager = LinearLayoutManager(this)
+        binding.ratesRecyclerview.setHasFixedSize(true)
+
+        mainViewModel.getRates().observe(this, {
+            ratesAdapter.submitList(it.rates.toList())
+        })
+
+        mainViewModel.loadLatestRates()
     }
 }
