@@ -3,32 +3,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".ExchangeActivity">
 
+    <RelativeLayout
+        android:id="@+id/exchange_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center">
 
-    <EditText
-        android:id="@+id/base_edit"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:inputType="number"
-        tools:text="0" />
+        <Spinner
+            android:id="@+id/base_spinner"
+            android:layout_width="@dimen/dimen100dp"
+            android:layout_height="@dimen/dimen50dp"
+            android:layout_margin="@dimen/dimen5dp"
+            android:theme="@style/spinnerTheme"
+            android:entries="@array/Currencies"
+            android:background="@color/dark_grey" />
 
-    <TextView
-        android:id="@+id/symbol_text"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/base_edit"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        tools:text="0" />
+        <EditText
+            android:id="@+id/base_edit"
+            android:layout_width="@dimen/dimen100dp"
+            android:layout_height="@dimen/dimen50dp"
+            android:layout_margin="@dimen/dimen5dp"
+            android:layout_toEndOf="@id/base_spinner"
+            android:layout_toRightOf="@id/base_spinner"
+            android:gravity="center"
+            android:background="@color/white"
+            android:inputType="number"
+            android:hint="1"
+            tools:text="0" />
+
+        <Spinner
+            android:id="@+id/symbol_spinner"
+            android:layout_width="@dimen/dimen100dp"
+            android:layout_height="@dimen/dimen50dp"
+            android:layout_below="@id/base_spinner"
+            android:entries="@array/Currencies"
+            android:layout_margin="@dimen/dimen5dp"
+            android:theme="@style/spinnerTheme"
+            android:background="@color/dark_grey" />
+
+        <TextView
+            android:id="@+id/symbol_text"
+            android:layout_width="@dimen/dimen100dp"
+            android:layout_height="@dimen/dimen50dp"
+            android:background="@color/white"
+            android:layout_below="@id/base_edit"
+            android:layout_margin="@dimen/dimen5dp"
+            android:layout_toEndOf="@id/symbol_spinner"
+            android:layout_toRightOf="@id/symbol_spinner"
+            android:gravity="center"
+            android:text="0" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/exchange_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/exchange_layout"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/exchange" />
+        android:text="@string/exchange"
+        android:textColor="@color/white"
+        android:textAllCaps="false" />
 </RelativeLayout>

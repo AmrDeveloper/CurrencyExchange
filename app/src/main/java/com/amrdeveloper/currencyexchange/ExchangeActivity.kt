@@ -1,9 +1,9 @@
 package com.amrdeveloper.currencyexchange
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.amrdeveloper.currencyexchange.databinding.ActivityExchangeBinding
 
 private const val TAG = "ExchangeActivity"
@@ -24,7 +24,7 @@ class ExchangeActivity : AppCompatActivity() {
 
         exchangeViewModel.getExchangeRates().observe(this, {
             val rates = it.rates.toList()
-            if(rates.isEmpty()) {
+            if (rates.isEmpty()) {
                 Toast.makeText(this, "Invalid Values", Toast.LENGTH_SHORT).show()
             } else {
                 val rate = rates[0]
@@ -38,7 +38,9 @@ class ExchangeActivity : AppCompatActivity() {
             if(times.isEmpty()) {
                 Toast.makeText(this, "Times mustn't be empty", Toast.LENGTH_SHORT).show()
             }else {
-                exchangeViewModel.requestExchangeRates("USD", "GBP")
+                val base = binding.baseSpinner.selectedItem.toString()
+                var symbol = binding.symbolSpinner.selectedItem.toString()
+                exchangeViewModel.requestExchangeRates(base, symbol)
             }
         }
     }
