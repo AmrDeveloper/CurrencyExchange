@@ -9,8 +9,8 @@ class RatesRepository(private val ratesService: RatesService) {
 
     private val latestRates = MutableLiveData<LatestResponse>()
 
-    fun loadLatestRates() {
-        ratesService.getLatestRates().enqueue(object : Callback<LatestResponse> {
+    fun loadLatestRates(base : String) {
+        ratesService.getLatestRates(base).enqueue(object : Callback<LatestResponse> {
             override fun onResponse(call: Call<LatestResponse>, response: Response<LatestResponse>) {
                 if (response.code() == 200) {
                     latestRates.value = response.body()

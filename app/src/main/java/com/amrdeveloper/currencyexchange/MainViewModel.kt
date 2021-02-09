@@ -7,8 +7,8 @@ class MainViewModel(private val repository : RatesRepository) : ViewModel() {
 
     private val rates = repository.getLatestRates()
 
-    fun loadLatestRates() {
-        repository.loadLatestRates()
+    fun loadLatestRates(base : String = "USD") {
+        repository.loadLatestRates(base)
     }
 
     fun getRates() = rates

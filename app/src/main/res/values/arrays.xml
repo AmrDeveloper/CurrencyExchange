@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="Currencies">
+        <item>@string/cad</item>
+        <item>@string/hkd</item>
+        <item>@string/isk</item>
+        <item>@string/php</item>
+        <item>@string/dkk</item>
+        <item>@string/huf</item>
+        <item>@string/czk</item>
+        <item>@string/aud</item>
+        <item>@string/ron</item>
+        <item>@string/sek</item>
+        <item>@string/idr</item>
+        <item>@string/inr</item>
+        <item>@string/brl</item>
+        <item>@string/rub</item>
+        <item>@string/hrk</item>
+        <item>@string/jpy</item>
+        <item>@string/thb</item>
+        <item>@string/chf</item>
+        <item>@string/sgd</item>
+        <item>@string/pln</item>
+        <item>@string/bgn</item>
+        <item>@string/try0</item>
+        <item>@string/cny</item>
+        <item>@string/nok</item>
+        <item>@string/nzd</item>
+        <item>@string/zar</item>
+        <item>@string/usd</item>
+        <item>@string/mxn</item>
+        <item>@string/ils</item>
+        <item>@string/gbp</item>
+        <item>@string/krw</item>
+    </array>
+</resources>
