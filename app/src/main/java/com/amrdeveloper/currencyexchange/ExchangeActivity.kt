@@ -35,12 +35,16 @@ class ExchangeActivity : AppCompatActivity() {
 
         binding.exchangeButton.setOnClickListener {
             val times = binding.baseEdit.text
-            if(times.isEmpty()) {
+            if (times.isEmpty()) {
                 Toast.makeText(this, "Times mustn't be empty", Toast.LENGTH_SHORT).show()
-            }else {
+            } else {
                 val base = binding.baseSpinner.selectedItem.toString()
-                var symbol = binding.symbolSpinner.selectedItem.toString()
-                exchangeViewModel.requestExchangeRates(base, symbol)
+                val symbol = binding.symbolSpinner.selectedItem.toString()
+                if (base == symbol) {
+                    binding.symbolText.text = times
+                } else {
+                    exchangeViewModel.requestExchangeRates(base, symbol)
+                }
             }
         }
     }

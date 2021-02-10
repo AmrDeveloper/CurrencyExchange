@@ -37,4 +37,5 @@
     <string name="ils">ILS</string>
     <string name="gbp">GBP</string>
     <string name="krw">KRW</string>
+    <string name="base_edit_hint">Enter number of coins</string>
 </resources>
