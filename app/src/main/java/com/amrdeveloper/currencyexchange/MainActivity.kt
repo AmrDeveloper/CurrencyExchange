@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     private val searchViewQueryListener = object : SearchView.OnQueryTextListener {
 
         override fun onQueryTextSubmit(query: String?): Boolean {
-            if(!query.isNullOrEmpty() || currencies.contains(query)) {
+            if(!query.isNullOrEmpty() || query?.length == 3 || currencies.contains(query)) {
                 mainViewModel.loadLatestRates(query.toString())
             } else {
                 Toast.makeText(baseContext, "Unsupported Currency name", Toast.LENGTH_SHORT).show()
