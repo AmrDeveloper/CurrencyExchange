@@ -28,6 +28,7 @@
         <item>@string/nzd</item>
         <item>@string/zar</item>
         <item>@string/usd</item>
+        <item>@string/eur</item>
         <item>@string/mxn</item>
         <item>@string/ils</item>
         <item>@string/gbp</item>
