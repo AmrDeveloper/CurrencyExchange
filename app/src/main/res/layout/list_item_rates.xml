@@ -14,19 +14,39 @@
         android:layout_height="match_parent"
         android:background="@color/dark_grey">
 
+        <ImageView
+            android:id="@+id/flag_image"
+            android:layout_centerVertical="true"
+            android:src="@drawable/flag_usd"
+            android:padding="5dp"
+            android:layout_width="@dimen/dimen50dp"
+            android:layout_height="@dimen/dimen50dp" />
+
         <TextView
             android:id="@+id/name_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:textColor="@color/purple_200"
             android:layout_margin="@dimen/dimen5dp"
-            android:gravity="center"
+            android:layout_toEndOf="@id/flag_image"
+            android:layout_toRightOf="@id/flag_image"
+            android:textColor="@color/purple_200"
             android:textSize="20sp"
             android:textStyle="bold"
             tools:text="USD" />
+
+        <TextView
+            android:id="@+id/fullname_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/name_text"
+            android:layout_margin="@dimen/dimen5dp"
+            android:layout_toEndOf="@id/flag_image"
+            android:layout_toRightOf="@id/flag_image"
+            android:gravity="center"
+            android:textColor="@color/grey"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="Dollar" />
 
         <TextView
             android:id="@+id/rates_text"
@@ -37,7 +57,7 @@
             android:layout_centerVertical="true"
             android:layout_margin="@dimen/dimen10dp"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="18sp"
             tools:text="110.000" />
 
     </RelativeLayout>

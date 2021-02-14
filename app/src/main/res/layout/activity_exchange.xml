@@ -18,7 +18,7 @@
             android:id="@+id/base_spinner"
             android:layout_width="@dimen/dimen100dp"
             android:layout_height="@dimen/dimen50dp"
-            android:layout_margin="@dimen/dimen5dp"
+            android:layout_margin="@dimen/dimen10dp"
             android:theme="@style/spinnerTheme"
             android:entries="@array/Currencies"
             android:background="@color/dark_grey" />
@@ -27,7 +27,7 @@
             android:id="@+id/base_edit"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dimen50dp"
-            android:layout_margin="@dimen/dimen5dp"
+            android:layout_margin="@dimen/dimen10dp"
             android:layout_toEndOf="@id/base_spinner"
             android:layout_toRightOf="@id/base_spinner"
             android:gravity="center"
@@ -41,7 +41,7 @@
             android:layout_height="@dimen/dimen50dp"
             android:layout_below="@id/base_spinner"
             android:entries="@array/Currencies"
-            android:layout_margin="@dimen/dimen5dp"
+            android:layout_margin="@dimen/dimen10dp"
             android:theme="@style/spinnerTheme"
             android:background="@color/dark_grey" />
 
@@ -51,7 +51,7 @@
             android:layout_height="@dimen/dimen50dp"
             android:background="@color/white"
             android:layout_below="@id/base_edit"
-            android:layout_margin="@dimen/dimen5dp"
+            android:layout_margin="@dimen/dimen10dp"
             android:layout_toEndOf="@id/symbol_spinner"
             android:layout_toRightOf="@id/symbol_spinner"
             android:gravity="center"

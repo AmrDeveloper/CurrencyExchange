@@ -26,6 +26,8 @@ class RatesAdapter : ListAdapter<Pair<String, Double>, RecyclerView.ViewHolder>(
         fun bind(rate : Pair<String, Double>) {
             binding.nameText.text = rate.first
             binding.ratesText.text = rate.second.toString()
+            binding.fullnameText.text = CurrencyConstants.getCurrencyFullName(rate.first)
+            binding.flagImage.setImageResource(CurrencyConstants.getCurrencyDrawableId(rate.first))
         }
     }
 
