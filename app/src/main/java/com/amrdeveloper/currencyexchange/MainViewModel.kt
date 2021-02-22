@@ -2,23 +2,34 @@ package com.amrdeveloper.currencyexchange
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import java.time.LocalDate
 
-class MainViewModel(private val repository : RatesRepository) : ViewModel() {
+class MainViewModel(private val ratesRepository: RatesRepository,
+                    private val historyRepository: HistoryRepository) : ViewModel() {
 
-    private val rates = repository.getLatestRates()
+    private val rates = ratesRepository.getLatestRates()
+    private val history = historyRepository.getHistoryRates()
 
-    fun loadLatestRates(base : String = "USD") {
-        repository.loadLatestRates(base)
+    fun loadLatestRates(base: String = "USD") {
+        ratesRepository.loadLatestRates(base)
+    }
+
+    fun loadHistoryRates(base: String) {
+        val currentDate = LocalDate.now().toString()
+        val startDate = LocalDate.now().minusDays(10).toString()
+        historyRepository.loadHistoryRates(startDate, currentDate, base)
     }
 
     fun getRates() = rates
+    fun getHistory() = history
 }
 
-class MainViewModelFactory(private val repository: RatesRepository) : ViewModelProvider.Factory {
+class MainViewModelFactory(private val ratesRepository: RatesRepository,
+                           private val historyRepository: HistoryRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return MainViewModel(repository) as T
+            return MainViewModel(ratesRepository, historyRepository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

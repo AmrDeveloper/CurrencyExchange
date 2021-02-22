@@ -7,6 +7,7 @@
     <dimen name="dimen50dp">50dp</dimen>
     <dimen name="dimen75dp">75dp</dimen>
     <dimen name="dimen100dp">100dp</dimen>
+    <dimen name="dimen300dp">300dp</dimen>
 
     <!--SP-->
     <dimen name="dimen20sp">20sp</dimen>

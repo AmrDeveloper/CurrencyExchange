@@ -17,7 +17,9 @@ class MainApplication : Application() {
 
     private val ratesService by lazy { retrofit.create(RatesService::class.java) }
     private val exchangeService by lazy { retrofit.create(ExchangeService::class.java) }
+    private val historyService by lazy { retrofit.create(HistoryService::class.java) }
 
     val ratesRepository by lazy { RatesRepository(ratesService) }
     val exchangeRepository by lazy { ExchangeRepository(exchangeService) }
+    val historyRepository by lazy { HistoryRepository(historyService) }
 }

@@ -14,6 +14,7 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -25,6 +26,7 @@ android {
         }
     }
     compileOptions {
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -49,6 +51,8 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.activity:activity-ktx:$rootProject.activityVersion"
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
+    implementation "com.github.PhilJay:MPAndroidChart:$rootProject.mpAndroidChart"
+    implementation "de.hdodenhof:circleimageview:$rootProject.circleimageview"
 
     implementation "com.squareup.retrofit2:retrofit:$rootProject.reteofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.reteofitVersion"
@@ -59,5 +63,7 @@ dependencies {
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.9'
 
 }

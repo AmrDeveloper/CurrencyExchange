@@ -15,6 +15,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
 }
 
@@ -32,6 +33,8 @@ ext {
     recyclerViewVersion = '1.1.0'
     cardViewVersion = '1.0.0'
     materialVersion = '1.2.1'
+    mpAndroidChart = 'v3.1.0'
+    circleimageview = '3.1.0'
 
     // Testing
     junitVersion = '4.+'
