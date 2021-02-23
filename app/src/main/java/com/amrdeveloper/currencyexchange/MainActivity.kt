@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
             dataSet.add(lineDataSet)
 
             val xAxis = binding.ratesChart.xAxis
-            xAxis.valueFormatter = XAxisValueFormatter(historyRatesDates.toList())
+            xAxis.valueFormatter = XAxisValueFormatter(historyRatesDates)
 
             val lineData = LineData(dataSet)
             lineData.setDrawValues(true)
