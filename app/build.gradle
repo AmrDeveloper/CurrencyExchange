@@ -41,22 +41,26 @@ android {
 dependencies {
 
     implementation "androidx.core:core-ktx:$rootProject.coreEtx"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$rootProject.appcompatVersion"
+
     implementation "com.google.android.material:material:$rootProject.materialVersion"
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
     implementation "androidx.cardview:cardview:$rootProject.cardViewVersion"
+    implementation "com.github.PhilJay:MPAndroidChart:$rootProject.mpAndroidChart"
+    implementation "de.hdodenhof:circleimageview:$rootProject.circleimageview"
 
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.activity:activity-ktx:$rootProject.activityVersion"
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
-    implementation "com.github.PhilJay:MPAndroidChart:$rootProject.mpAndroidChart"
-    implementation "de.hdodenhof:circleimageview:$rootProject.circleimageview"
 
     implementation "com.squareup.retrofit2:retrofit:$rootProject.reteofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.reteofitVersion"
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.reteofitVersion"
+
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroidVersion"
 
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leackCanaryVersion"
 
@@ -64,6 +68,5 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
 
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.9'
-
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 }

@@ -28,6 +28,8 @@ ext {
 
     reteofitVersion = '2.9.0'
     lifecycleVersion = '2.2.0'
+    rxVersion = '2.2.12'
+    rxAndroidVersion = '2.1.1'
     coreEtx = '1.3.2'
 
     recyclerViewVersion = '1.1.0'

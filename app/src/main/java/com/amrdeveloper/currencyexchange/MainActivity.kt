@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -148,4 +149,9 @@ class MainActivity : AppCompatActivity() {
             return values.elementAt(value.toInt())
         }
     }
+
+    private val onClickListener = View.OnClickListener {
+
+    }
+
 }

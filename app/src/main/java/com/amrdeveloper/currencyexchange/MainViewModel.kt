@@ -22,6 +22,12 @@ class MainViewModel(private val ratesRepository: RatesRepository,
 
     fun getRates() = rates
     fun getHistory() = history
+
+    override fun onCleared() {
+        super.onCleared()
+        ratesRepository.clearCompositeDisposable()
+        historyRepository.clearCompositeDisposable()
+    }
 }
 
 class MainViewModelFactory(private val ratesRepository: RatesRepository,

@@ -13,6 +13,10 @@ class ExchangeViewModel(private val repository: ExchangeRepository) : ViewModel(
 
     fun getExchangeRates() = exchangeRates
 
+    override fun onCleared() {
+        super.onCleared()
+        repository.clearCompositeDisposable()
+    }
 }
 
 class ExchangeViewModelFactory(private val repository: ExchangeRepository) : ViewModelProvider.Factory {

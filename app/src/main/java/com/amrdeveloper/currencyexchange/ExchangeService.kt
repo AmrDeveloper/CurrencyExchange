@@ -1,6 +1,6 @@
 package com.amrdeveloper.currencyexchange
 
-import retrofit2.Call
+import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -10,5 +10,5 @@ interface ExchangeService {
     fun getExchangeRates(
             @Query("base") base : String,
             @Query("symbols") symbols : String
-    ): Call<LatestResponse>
+    ): Single<LatestResponse>
 }

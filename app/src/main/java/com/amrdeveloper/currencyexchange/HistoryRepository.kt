@@ -1,32 +1,32 @@
 package com.amrdeveloper.currencyexchange
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+
+private const val TAG = "HistoryRepository"
 
 class HistoryRepository(private val historyService: HistoryService) {
 
     private val historyRates = MutableLiveData<HistoryResponse>()
+    private val compositeDisposable = CompositeDisposable()
 
     fun loadHistoryRates(start : String, end : String, base : String) {
-        historyService.getHistoryRates(start, end, base).enqueue(object :
-            Callback<HistoryResponse> {
-            override fun onResponse(
-                call: Call<HistoryResponse>,
-                response: Response<HistoryResponse>
-            ) {
-                if (response.code() == 200) {
-                    historyRates.value = response.body()
-                }
-            }
+        val responseDisposable = historyService.getHistoryRates(start, end, base)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { response -> historyRates.value = response },
+                { t -> Log.d(TAG, "loadHistoryRates: ${t.message}") })
 
-            override fun onFailure(call: Call<HistoryResponse>, t: Throwable) {
-
-            }
-        })
-
+        compositeDisposable.add(responseDisposable)
     }
 
     fun getHistoryRates() = historyRates
+
+    fun clearCompositeDisposable() {
+        compositeDisposable.clear()
+    }
 }
