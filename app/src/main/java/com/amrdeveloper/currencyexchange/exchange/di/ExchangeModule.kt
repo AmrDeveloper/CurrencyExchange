@@ -13,6 +13,6 @@ abstract class ExchangeModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(MainViewModel::class)
+    @ViewModelKey(ExchangeViewModel::class)
     abstract fun bindViewModel(viewModel : ExchangeViewModel) : ViewModel
 }

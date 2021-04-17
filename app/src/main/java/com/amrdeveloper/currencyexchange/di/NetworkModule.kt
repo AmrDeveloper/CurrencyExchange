@@ -12,7 +12,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 class NetworkModule {
 
-    private val BASE_URL = "http://api.exchangeratesapi.io/v1/"
+    private val BASE_URL = "https://api.exchangerate.host/"
 
     @Provides
     fun provideRetrofit() : Retrofit {

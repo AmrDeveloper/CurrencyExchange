@@ -6,10 +6,10 @@ import retrofit2.http.Query
 
 interface HistoryService {
 
-    @GET("history")
+    @GET("timeseries")
     fun getHistoryRates(
-            @Query("start_at") start: String,
-            @Query("end_at") end: String,
+            @Query("start_date") start: String,
+            @Query("end_date") end: String,
             @Query("base") base : String,
             @Query("symbols") symbols : String = "USD",
     ): Single<HistoryResponse>
