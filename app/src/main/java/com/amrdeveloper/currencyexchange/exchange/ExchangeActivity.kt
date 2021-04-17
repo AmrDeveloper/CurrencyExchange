@@ -1,23 +1,24 @@
-package com.amrdeveloper.currencyexchange
+package com.amrdeveloper.currencyexchange.exchange
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.amrdeveloper.currencyexchange.MainApplication
 import com.amrdeveloper.currencyexchange.databinding.ActivityExchangeBinding
+import javax.inject.Inject
 
 private const val TAG = "ExchangeActivity"
 
 class ExchangeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityExchangeBinding
-
-    private val exchangeViewModel: ExchangeViewModel by viewModels {
-        val application = (application as MainApplication)
-        ExchangeViewModelFactory(application.exchangeRepository)
-    }
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val exchangeViewModel by viewModels<ExchangeViewModel> { viewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MainApplication).appComponent.exchangeComponent().create().inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityExchangeBinding.inflate(layoutInflater)
         setContentView(binding.root)

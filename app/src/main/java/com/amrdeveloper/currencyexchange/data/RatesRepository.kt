@@ -1,4 +1,4 @@
-package com.amrdeveloper.currencyexchange
+package com.amrdeveloper.currencyexchange.data
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -6,10 +6,11 @@ import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 private const val TAG = "RatesRepository"
 
-class RatesRepository(private val ratesService: RatesService) {
+class RatesRepository @Inject constructor(private val ratesService: RatesService) {
 
     private val latestRates = MutableLiveData<LatestResponse>()
     private val compositeDisposable = CompositeDisposable()

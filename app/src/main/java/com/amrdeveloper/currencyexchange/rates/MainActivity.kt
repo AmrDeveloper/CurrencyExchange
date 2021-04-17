@@ -1,8 +1,9 @@
-package com.amrdeveloper.currencyexchange
+package com.amrdeveloper.currencyexchange.rates
 
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -10,14 +11,19 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.amrdeveloper.currencyexchange.MainApplication
+import com.amrdeveloper.currencyexchange.R
 import com.amrdeveloper.currencyexchange.databinding.ActivityMainBinding
+import com.amrdeveloper.currencyexchange.exchange.ExchangeActivity
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.formatter.ValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import javax.inject.Inject
 
 private const val TAG = "MainActivity"
 
@@ -25,14 +31,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var ratesAdapter: RatesAdapter
     private lateinit var binding: ActivityMainBinding
+
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val mainViewModel by viewModels<MainViewModel> { viewModelFactory }
+
     private val currencies by lazy { resources.getStringArray(R.array.Currencies) }
 
-    private val mainViewModel: MainViewModel by viewModels {
-        val application = (application as MainApplication)
-        MainViewModelFactory(application.ratesRepository, application.historyRepository)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        (application as MainApplication).appComponent.mainComponent().create().inject(this)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -43,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.getHistory().observe(this, {
             val historyRatesResponse = it.rates.toSortedMap()
             val historyRates = historyRatesResponse.values
-            
+
             val values = arrayListOf<Entry>()
             repeat(6) { i ->
                 values.add(Entry(i.toFloat(), historyRates.elementAt(i)["USD"]!!.toFloat()))
@@ -76,6 +82,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         mainViewModel.getRates().observe(this, {
+            Log.d(TAG, "onCreate: ${it}")
             ratesAdapter.submitList(it.rates.toList())
         })
 

@@ -1,10 +1,11 @@
-package com.amrdeveloper.currencyexchange
+package com.amrdeveloper.currencyexchange.rates
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.amrdeveloper.currencyexchange.data.CurrencyConstants
 import com.amrdeveloper.currencyexchange.databinding.ListItemRatesBinding
 
 class RatesAdapter : ListAdapter<Pair<String, Double>, RecyclerView.ViewHolder>(RatesDiffCallback()) {

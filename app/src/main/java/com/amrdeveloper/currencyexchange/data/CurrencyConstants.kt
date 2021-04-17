@@ -1,4 +1,6 @@
-package com.amrdeveloper.currencyexchange
+package com.amrdeveloper.currencyexchange.data
+
+import com.amrdeveloper.currencyexchange.R
 
 object CurrencyConstants {
 

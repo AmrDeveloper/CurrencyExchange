@@ -1,14 +1,15 @@
-package com.amrdeveloper.currencyexchange
+package com.amrdeveloper.currencyexchange.data
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 private const val TAG = "HistoryRepository"
 
-class HistoryRepository(private val historyService: HistoryService) {
+class HistoryRepository @Inject constructor(private val historyService: HistoryService) {
 
     private val historyRates = MutableLiveData<HistoryResponse>()
     private val compositeDisposable = CompositeDisposable()
