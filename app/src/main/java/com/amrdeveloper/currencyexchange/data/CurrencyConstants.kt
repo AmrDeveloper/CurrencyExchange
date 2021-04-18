@@ -39,7 +39,7 @@ object CurrencyConstants {
             "RUB" -> return "Russian ruble"
             "HRK" -> return "Croatian kuna"
             "JPY" -> return "Japanese yen"
-            else -> return "None"
+            else -> return ""
         }
     }
 
