@@ -30,7 +30,8 @@ class ExchangeActivity : AppCompatActivity() {
             } else {
                 val rate = rates[0]
                 val times = binding.baseEdit.text.toString().toInt()
-                binding.symbolText.text = rate.second.times(times).toString()
+                val exchangeRatesVal = rate.second.times(times)
+                binding.symbolText.text = String.format("%.4f", exchangeRatesVal)
             }
         })
 
