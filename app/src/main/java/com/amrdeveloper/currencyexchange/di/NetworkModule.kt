@@ -8,12 +8,14 @@ import dagger.Provides
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
 @Module
 class NetworkModule {
 
     private val BASE_URL = "https://api.exchangerate.host/"
 
+    @Singleton
     @Provides
     fun provideRetrofit() : Retrofit {
         return Retrofit.Builder()
@@ -23,16 +25,19 @@ class NetworkModule {
             .build()
     }
 
+    @Singleton
     @Provides
     fun provideRatesService(retrofit: Retrofit) : RatesService {
         return retrofit.create(RatesService::class.java)
     }
 
+    @Singleton
     @Provides
     fun provideExchangeService(retrofit: Retrofit) : ExchangeService {
         return retrofit.create(ExchangeService::class.java)
     }
 
+    @Singleton
     @Provides
     fun provideHistoryService(retrofit: Retrofit) : HistoryService {
         return retrofit.create(HistoryService::class.java)
