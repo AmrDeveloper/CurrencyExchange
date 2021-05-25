@@ -5,7 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.amrdeveloper.currencyexchange.data.ExchangeRepository
+import com.amrdeveloper.currencyexchange.data.CurrencyRepository
 import com.amrdeveloper.currencyexchange.data.LatestResponse
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -14,7 +14,7 @@ private const val TAG = "ExchangeViewModel"
 
 class ExchangeViewModel @Inject constructor(
         application: Application,
-        private val repository: ExchangeRepository)
+        private val repository: CurrencyRepository)
     : AndroidViewModel(application) {
 
     private val exchangeRates = MutableLiveData<LatestResponse>()

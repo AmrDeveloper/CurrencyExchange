@@ -1,8 +1,6 @@
 package com.amrdeveloper.currencyexchange.di
 
-import com.amrdeveloper.currencyexchange.data.ExchangeService
-import com.amrdeveloper.currencyexchange.data.HistoryService
-import com.amrdeveloper.currencyexchange.data.RatesService
+import com.amrdeveloper.currencyexchange.data.CurrencyService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -27,19 +25,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRatesService(retrofit: Retrofit) : RatesService {
-        return retrofit.create(RatesService::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun provideExchangeService(retrofit: Retrofit) : ExchangeService {
-        return retrofit.create(ExchangeService::class.java)
-    }
-
-    @Singleton
-    @Provides
-    fun provideHistoryService(retrofit: Retrofit) : HistoryService {
-        return retrofit.create(HistoryService::class.java)
+    fun provideCurrencyService(retrofit: Retrofit) : CurrencyService {
+        return retrofit.create(CurrencyService::class.java)
     }
 }
