@@ -3,7 +3,6 @@ package com.amrdeveloper.currencyexchange.rates
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -15,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.amrdeveloper.currencyexchange.MainApplication
 import com.amrdeveloper.currencyexchange.R
+import com.amrdeveloper.currencyexchange.data.HistoryResponse
 import com.amrdeveloper.currencyexchange.databinding.ActivityMainBinding
 import com.amrdeveloper.currencyexchange.exchange.ExchangeActivity
 import com.github.mikephil.charting.components.XAxis
@@ -32,7 +32,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var ratesAdapter: RatesAdapter
     private lateinit var binding: ActivityMainBinding
 
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
     private val mainViewModel by viewModels<MainViewModel> { viewModelFactory }
 
     private val currencies by lazy { resources.getStringArray(R.array.Currencies) }
@@ -45,46 +46,7 @@ class MainActivity : AppCompatActivity() {
 
         ratesRecyclerViewSetup()
         ratesChartSetup()
-
-        mainViewModel.getHistory().observe(this, {
-            val historyRatesResponse = it.rates.toSortedMap()
-            val historyRates = historyRatesResponse.values
-
-            val values = arrayListOf<Entry>()
-            repeat(6) { i ->
-                values.add(Entry(i.toFloat(), historyRates.elementAt(i)["USD"]!!.toFloat()))
-            }
-
-            val historyRatesDates = arrayListOf<String>()
-            repeat(6) { i ->
-                historyRatesDates.add(historyRatesResponse.keys.elementAt(i))
-            }
-
-            val lineDataSet = LineDataSet(values, "USD Rates with base ${it.base}")
-            lineDataSet.fillAlpha = 110
-            lineDataSet.color = Color.RED
-            lineDataSet.valueTextColor = ContextCompat.getColor(this, R.color.purple_200)
-            lineDataSet.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
-            lineDataSet.setDrawFilled(true)
-            lineDataSet.fillColor = Color.GRAY
-
-            val dataSet = arrayListOf<ILineDataSet>()
-            dataSet.add(lineDataSet)
-
-            val xAxis = binding.ratesChart.xAxis
-            xAxis.valueFormatter = XAxisValueFormatter(historyRatesDates)
-
-            val lineData = LineData(dataSet)
-            lineData.setDrawValues(true)
-
-            binding.ratesChart.data = lineData
-            binding.ratesChart.invalidate()
-        })
-
-        mainViewModel.getRates().observe(this, {
-            Log.d(TAG, "onCreate: ${it}")
-            ratesAdapter.submitList(it.rates.toList())
-        })
+        setupObservers()
 
         mainViewModel.loadLatestRates()
         mainViewModel.loadHistoryRates("EUR")
@@ -95,6 +57,52 @@ class MainActivity : AppCompatActivity() {
         binding.ratesRecyclerview.adapter = ratesAdapter
         binding.ratesRecyclerview.layoutManager = LinearLayoutManager(this)
         binding.ratesRecyclerview.setHasFixedSize(true)
+    }
+
+    private fun setupObservers() {
+        mainViewModel.getHistory().observe(this, {
+            showHistoryRates(it)
+        })
+
+        mainViewModel.getRates().observe(this, {
+            ratesAdapter.submitList(it.rates.toList())
+        })
+    }
+
+    private fun showHistoryRates(response: HistoryResponse) {
+        val historyRatesResponse = response.rates.toSortedMap()
+        val historyRates = historyRatesResponse.values
+
+        val values = arrayListOf<Entry>()
+        repeat(6) { i ->
+            values.add(Entry(i.toFloat(), historyRates.elementAt(i)["USD"]!!.toFloat()))
+        }
+
+        val historyRatesDates = arrayListOf<String>()
+        repeat(6) { i ->
+            historyRatesDates.add(historyRatesResponse.keys.elementAt(i))
+        }
+
+        val lineDataSet = LineDataSet(values, "USD Rates with base ${response.base}")
+        lineDataSet.fillAlpha = 110
+        lineDataSet.color = Color.RED
+        lineDataSet.valueTextColor = ContextCompat.getColor(this, R.color.purple_200)
+        lineDataSet.mode = LineDataSet.Mode.HORIZONTAL_BEZIER
+        lineDataSet.setDrawFilled(true)
+        lineDataSet.fillColor = Color.GRAY
+
+        val dataSet = arrayListOf<ILineDataSet>()
+        dataSet.add(lineDataSet)
+
+        val xAxis = binding.ratesChart.xAxis
+        xAxis.valueFormatter = XAxisValueFormatter(historyRatesDates)
+
+        val lineData = LineData(dataSet)
+        lineData.setDrawValues(true)
+
+        binding.ratesChart.data = lineData
+        binding.ratesChart.axisRight.isEnabled = false
+        binding.ratesChart.invalidate()
     }
 
     private fun ratesChartSetup() {
@@ -122,7 +130,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.exchange_menu -> {
                 val intent = Intent(this, ExchangeActivity::class.java)
                 startActivity(intent)
@@ -134,7 +142,7 @@ class MainActivity : AppCompatActivity() {
     private val searchViewQueryListener = object : SearchView.OnQueryTextListener {
 
         override fun onQueryTextSubmit(currencyName: String?): Boolean {
-            if(!currencyName.isNullOrEmpty() || currencyName?.length == 3 || currencies.contains(currencyName)) {
+            if (!currencyName.isNullOrEmpty() || currencyName?.length == 3 || currencies.contains(currencyName)) {
                 mainViewModel.loadLatestRates(currencyName.toString())
                 mainViewModel.loadHistoryRates(currencyName.toString())
             } else {
@@ -148,7 +156,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private class XAxisValueFormatter(private val values : List<String>) : ValueFormatter() {
+    private class XAxisValueFormatter(private val values: List<String>) : ValueFormatter() {
 
         override fun getFormattedValue(value: Float): String {
             return values.elementAt(value.toInt())
