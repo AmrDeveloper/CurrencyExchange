@@ -1,35 +1,45 @@
 package com.amrdeveloper.currencyexchange.rates
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.amrdeveloper.currencyexchange.data.HistoryRepository
+import com.amrdeveloper.currencyexchange.data.HistoryResponse
+import com.amrdeveloper.currencyexchange.data.LatestResponse
 import com.amrdeveloper.currencyexchange.data.RatesRepository
-import java.time.LocalDate
+import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
+
+private const val TAG = "MainViewModel"
 
 class MainViewModel @Inject constructor(
         private val ratesRepository: RatesRepository,
         private val historyRepository: HistoryRepository)
     : ViewModel() {
 
-    private val rates = ratesRepository.getLatestRates()
-    private val history = historyRepository.getHistoryRates()
+    private val latestRates = MutableLiveData<LatestResponse>()
+    private val historyRates = MutableLiveData<HistoryResponse>()
+    private val compositeDisposable = CompositeDisposable()
 
     fun loadLatestRates(base: String = "USD") {
-        ratesRepository.loadLatestRates(base)
+        val disposable = ratesRepository.loadLatestRates(base)
+                .subscribe({ response -> latestRates.value = response },
+                        { t -> Log.d(TAG, "loadLatestRates: ${t.message}") })
+        compositeDisposable.add(disposable)
     }
 
     fun loadHistoryRates(base: String) {
-        val currentDate = LocalDate.now().toString()
-        val startDate = LocalDate.now().minusDays(10).toString()
-        historyRepository.loadHistoryRates(startDate, currentDate, base)
+        val disposable = historyRepository.loadHistoryRates(base)
+                            .subscribe({ response -> historyRates.value = response },
+                                    { t -> Log.d(TAG, "loadHistoryRates: ${t.message}") })
+        compositeDisposable.add(disposable)
     }
 
-    fun getRates() = rates
-    fun getHistory() = history
+    fun getRates() = latestRates
+    fun getHistory() = historyRates
 
     override fun onCleared() {
         super.onCleared()
-        ratesRepository.clearCompositeDisposable()
-        historyRepository.clearCompositeDisposable()
+        compositeDisposable.clear()
     }
 }
