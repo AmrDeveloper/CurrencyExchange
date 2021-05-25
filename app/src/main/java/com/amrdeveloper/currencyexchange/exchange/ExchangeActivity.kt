@@ -45,7 +45,7 @@ class ExchangeActivity : AppCompatActivity() {
                 if (base == symbol) {
                     binding.symbolText.text = times
                 } else {
-                    exchangeViewModel.requestExchangeRates(base, symbol)
+                    exchangeViewModel.loadExchangeRates(base, symbol)
                 }
             }
         }
