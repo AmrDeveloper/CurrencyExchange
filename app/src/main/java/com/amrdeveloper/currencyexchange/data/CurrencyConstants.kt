@@ -18,7 +18,6 @@ object CurrencyConstants {
             "ZAR" -> return "South African Rand"
             "USD" -> return "United States Dollar"
             "MXN" -> return "Mexican Peso"
-            "ILS" -> return "Israeli New Shekel"
             "GBP" -> return "British Pound Sterling"
             "KRW" -> return "South Korean Won"
             "MYR" -> return "Malaysian Ringgit"
@@ -74,7 +73,6 @@ object CurrencyConstants {
             "NZD" -> return R.drawable.flag_nzd
             "ZAR" -> return R.drawable.flag_zar
             "MXN" -> return R.drawable.flag_mxn
-            "ILS" -> return R.drawable.flag_ils
             "GBP" -> return R.drawable.flag_gbp
             "KRW" -> return R.drawable.flag_krw
             else -> return R.drawable.ic_coin
