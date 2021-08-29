@@ -5,7 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.amrdeveloper.currencyexchange.data.CurrencyRepository
+import com.amrdeveloper.currencyexchange.data.source.CurrencyRepository
 import com.amrdeveloper.currencyexchange.data.LatestResponse
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject

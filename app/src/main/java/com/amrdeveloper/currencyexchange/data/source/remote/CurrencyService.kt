@@ -1,5 +1,7 @@
-package com.amrdeveloper.currencyexchange.data
+package com.amrdeveloper.currencyexchange.data.source.remote
 
+import com.amrdeveloper.currencyexchange.data.HistoryResponse
+import com.amrdeveloper.currencyexchange.data.LatestResponse
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

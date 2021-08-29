@@ -1,7 +1,6 @@
 package com.amrdeveloper.currencyexchange.di
 
 import android.app.Application
-import android.content.Context
 import com.amrdeveloper.currencyexchange.exchange.di.ExchangeComponent
 import com.amrdeveloper.currencyexchange.rates.di.MainComponent
 import dagger.BindsInstance

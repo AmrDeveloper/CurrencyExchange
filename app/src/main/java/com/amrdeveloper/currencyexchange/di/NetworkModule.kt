@@ -1,6 +1,6 @@
 package com.amrdeveloper.currencyexchange.di
 
-import com.amrdeveloper.currencyexchange.data.CurrencyService
+import com.amrdeveloper.currencyexchange.data.source.remote.CurrencyService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
